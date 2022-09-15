@@ -27,4 +27,19 @@ public class test {
         os.write(bytes);
         os.close();
     }
+
+    public void preventGC() {
+        for (int i = 0; i < 100000; i++) {
+            //do something
+
+            //prevent GC
+            if (i % 1000 == 0) {
+                try {
+                    Thread.sleep(0);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
+            }
+        }
+    }
 }
